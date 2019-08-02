@@ -17,10 +17,10 @@
 </style>
 <template>
   <view class="container">
-    <view class="userinfo" @tap="handleViewTap">
+    <!-- <view class="userinfo" @tap="handleViewTap">
       <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
       <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
-    </view>
+    </view> -->
 
     <panel>
       <view class="title" slot="title">测试数据绑定</view>
@@ -92,7 +92,7 @@
 
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: 'test'
+      navigationBarTitleText: '首页'
     }
     components = {
       panel: Panel,
