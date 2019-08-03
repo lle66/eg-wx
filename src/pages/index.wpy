@@ -1,28 +1,20 @@
 <style lang="less">
-  .userinfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .userinfo-avatar {
-    width: 80rpx;
-    height: 80rpx;
-    border-radius: 50%;
-  }
-
-  .userinfo-nickname {
-    color: #aaa;
-  }
+  .container {
+  height: 100%;
+  
+}
 </style>
 <template>
   <view class="container">
+    <!-- <view>{{mynum}}</view> -->
+    <ss :list.sync="list"></ss>
+    <sw :list.sync="list"></sw>
     <!-- <view class="userinfo" @tap="handleViewTap">
       <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
       <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
     </view> -->
 
-    <panel>
+    <!-- <panel>
       <view class="title" slot="title">测试数据绑定</view>
 
       <text class="info">{{normalTitle}}</text>
@@ -73,12 +65,14 @@
       <list></list>
     </panel>
 
-    <toast />
+    <toast /> -->
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import Ss from '@/components/ss'
+  import Sw from '@/components/sw'
   import Panel from '@/components/panel' // alias example
   import Counter from 'counter' // alias example
   import List from '../components/list' // aliasFields example
@@ -95,18 +89,57 @@
       navigationBarTitleText: '首页'
     }
     components = {
-      panel: Panel,
-      counter1: Counter,
-      counter2: Counter,
-      list: List,
-      group: Group,
-      toast: Toast
+      ss:Ss,
+      sw:Sw
+      // panel: Panel,
+      // counter1: Counter,
+      // counter2: Counter,
+      // list: List,
+      // group: Group,
+      // toast: Toast
     }
 
     mixins = [testMixin]
 
     data = {
       mynum: 20,
+      list: [{
+          id: 1,
+          imgUrl: '/image/home/scenic@2x.png',
+          label: '景点推荐',
+          page: '/pages/guide/spot/index'
+        },
+        {
+          id: 2,
+          imgUrl: '/image/home/food@2x.png',
+          label: '美食推荐',
+          page: '/pages/home/food/index'
+        },
+        {
+          id: 3,
+          imgUrl: '/image/home/route@2x.png',
+          label: '路线推荐',
+          page: '/pages/guide/plan/index'
+        },
+        {
+          id: 4,
+          imgUrl: '/image/home/strategy@2x.png',
+          label: '官方攻略',
+          page: '/pages/guide/Strategy/index'
+        },
+        {
+          id: 5,
+          imgUrl: '/image/home/strategy@2x.png',
+          label: '官方攻略1',
+          page: '/pages/guide/Strategy/index'
+        },
+        {
+          id: 6,
+          imgUrl: '/image/home/strategy@2x.png',
+          label: '官方攻略2',
+          page: '/pages/guide/Strategy/index'
+        }
+      ],
       userInfo: {
         nickName: '加载中...'
       },

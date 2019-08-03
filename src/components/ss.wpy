@@ -1,0 +1,46 @@
+<style>
+.list{
+  width: 100%;
+  height:100%;
+  white-space:nowrap
+}
+.wrapper{
+  width: 187.5rpx;
+  height: 187.5rpx;
+display:inline-block; 
+
+}
+.img{ 
+  width: 90rpx;
+   height: 90rpx
+}
+</style>
+
+<template>
+  <view>
+    <!-- <text> {{title}}</text> -->
+    <scroll-view scroll-x class="list" >
+      <view wx:for="{{list}}" wx:key="id" class="wrapper">
+        <view style="display: flex;flex-direction: column">
+           <image src="{{item.imgUrl}}" class="img"/>
+          <text>{{item.label}}</text>
+        </view>
+         
+      </view>
+    </scroll-view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  export default class Ss extends wepy.component {
+    props = {
+      list: Array
+    }
+    data = {
+      
+    }
+    onLoad() {
+      console.log("log.....")
+    }
+  }
+</script>

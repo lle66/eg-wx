@@ -1,0 +1,12 @@
+<template>
+    <view></view>
+</template>
+
+
+
+<script>
+import wepy from 'wepy'
+export default  class Sw extends wepy.component {
+    
+}
+</script>

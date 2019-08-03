@@ -17,9 +17,9 @@
         </view>
         <!-- <view style="overflow:auto">{{years}}</view> -->
         <!-- 滚动选择器 -->
-        <view style="width:300rpx">
-            <view style="margin-bottom:50rpx">{{year}}年{{month}}月{{day}}日</view>
-            <picker-view indicator-style="height: 50px;" style="width: 100%; height: 100rpx;" value="{{value}}" bindchange="bindChange">
+        <view style="width:500rpx;">
+            <view style="margin-top:50rpx;float:left">{{year}}年{{month}}月{{day}}日</view>
+            <picker-view indicator-style="height: 100rpx;" style="width: 100%; height: 100rpx;" value="{{value}}" bindchange="bindChange">
                 <picker-view-column>
                     <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
                 </picker-view-column>
@@ -32,7 +32,7 @@
             </picker-view>
         </view>
         <!-- <view wx:for="{{months}}">{{item}}</view> -->
-        
+    <text> {{years[0]}}</text>
     </view>
 </template>
 
