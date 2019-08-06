@@ -1,31 +1,39 @@
-<style>
-.list{
-  width: 100%;
-  height:100%;
-  white-space:nowrap
-}
-.wrapper{
-  width: 187.5rpx;
-  height: 187.5rpx;
-display:inline-block; 
-
-}
-.img{ 
-  width: 90rpx;
-   height: 90rpx
-}
+<style lang="less">
+  .list {
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    .wrapper {
+      width: 188rpx;
+      height: 187.5rpx;
+      display: inline-block;
+      .item {
+        display: flex;
+        flex-direction: column;
+        // justify-content: space-around;
+        align-items: center;
+        .img {
+          width: 90rpx;
+          height: 90rpx;
+        }
+        .text{
+          color: #999;
+          font-size: 28rpx;
+        }
+      }
+    }
+  }
 </style>
 
 <template>
   <view>
     <!-- <text> {{title}}</text> -->
-    <scroll-view scroll-x class="list" >
+    <scroll-view scroll-x class="list">
       <view wx:for="{{list}}" wx:key="id" class="wrapper">
-        <view style="display: flex;flex-direction: column">
-           <image src="{{item.imgUrl}}" class="img"/>
-          <text>{{item.label}}</text>
+        <view class="item">
+          <image src="{{item.imgUrl}}" class="img" />
+          <text class="text">{{item.label}}</text>
         </view>
-         
       </view>
     </scroll-view>
   </view>
@@ -36,9 +44,7 @@ display:inline-block;
     props = {
       list: Array
     }
-    data = {
-      
-    }
+    data = {}
     onLoad() {
       console.log("log.....")
     }

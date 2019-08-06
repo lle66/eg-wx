@@ -1,0 +1,16 @@
+<template>
+    <view>
+        <text>11111111</text>
+    </view>
+
+</template>
+<script>
+import wepy from 'wepy'
+export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '详情页'
+    };
+    
+}
+</script>
+
