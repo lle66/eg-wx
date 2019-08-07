@@ -11,6 +11,10 @@ export default class Index extends wepy.page {
       navigationBarTitleText: '详情页'
     };
     
+    onLoad(option){
+        console.info("111111")
+console.info(option)
+    }
 }
 </script>
 
