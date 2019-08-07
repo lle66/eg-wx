@@ -64,6 +64,7 @@ if (prod) {
           quality: 80
         }
       }
-    }
+    },
+    axios: {}
   }
 }

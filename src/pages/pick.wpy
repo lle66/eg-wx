@@ -13,7 +13,7 @@
 <template>
     <view class="container">
         <view>
-            <image src="/image/big.jpg" class="img">
+            <image src="/image/big.jpg" class="img"/>
         </view>
         <!-- <view style="overflow:auto">{{years}}</view> -->
         <!-- 滚动选择器 -->

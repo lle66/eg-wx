@@ -17,9 +17,11 @@
   "author": "lle",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.0",
     "wepy": "^1.6.0",
     "wepy-async-function": "^1.4.4",
-    "wepy-com-toast": "^1.0.2"
+    "wepy-com-toast": "^1.0.2",
+    "wepy-plugin-axios": "^0.1.8"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",

@@ -1,163 +1,160 @@
 <style lang="less">
-  .container {
-    height: 100%;
-    .swiper {
-      padding: 0 40rpx;
+    .container {
+        height: 100%;
+        .swiper {
+            padding: 0 40rpx;
+        }
+        .userinfo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .userinfo-avatar {
+                width: 128rpx;
+                height: 128rpx;
+                margin: 20rpx;
+                border-radius: 50%;
+            }
+            .userinfo-nickname {
+                color: #aaa;
+            }
+        }
+        .usermotto {
+            margin-top: 200px;
+        }
     }
-    .userinfo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .userinfo-avatar {
-        width: 128rpx;
-        height: 128rpx;
-        margin: 20rpx;
-        border-radius: 50%;
-      }
-      .userinfo-nickname {
-        color: #aaa;
-      }
-    }
-    .usermotto {
-      margin-top: 200px;
-    }
-  }
 </style>
 <template>
-  <view class="container">
-    <view class="userinfo">
-      <image class="userinfo-avatar" @tap="clickImg" src="{{ userInfo.avatarUrl }}" background-size="cover" />
-      <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+    <view class="container">
+        <view class="userinfo">
+            <image class="userinfo-avatar" @tap="clickImg" src="{{ userInfo.avatarUrl }}" background-size="cover" />
+            <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+        </view>
+        <ss :list.sync="list"></ss>
+        <sw :imgUrls.sync="imgUrls" class="swiper"></sw>
+        <button size="mini">{{flag}}</button>
+        <switch checked="true" type="switch" color="" @change="switchChange" />
+        <button @tap="toast" size="mini">toast</button>
+        <toast />
     </view>
-    <ss :list.sync="list"></ss>
-    <sw :imgUrls.sync="imgUrls" class="swiper"></sw>
-    <button size="mini">{{flag}}</button>
-    <switch checked="true" type="switch" color="" @change="switchChange" />
-    <button @tap="toast" size="mini">toast</button>
-    <toast />
-  </view>
 </template>
 <script>
-  import wepy from 'wepy'
-  import Ss from '@/components/ss'
-  import Sw from '@/components/sw'
-  import moduleA from 'module-a' // aliasFields ignore module example
-  import Toast from 'wepy-com-toast'
-  console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
-  export default class Index extends wepy.page {
-    config = {
-      navigationBarTitleText: '首页'
-    }
-    components = {
-      ss: Ss,
-      sw: Sw,
-      toast: Toast,
-    }
-    data = {
-      flag: true,
-      mynum: 20,
-      imgUrls: [
-        'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
-        'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
-        'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
-      ],
-      list: [{
-          id: 1,
-          imgUrl: '/image/home/scenic@2x.png',
-          label: '景点推荐',
-          page: '/pages/guide/spot/index'
-        },
-        {
-          id: 2,
-          imgUrl: '/image/home/food@2x.png',
-          label: '美食推荐',
-          page: '/pages/home/food/index'
-        },
-        {
-          id: 3,
-          imgUrl: '/image/home/route@2x.png',
-          label: '路线推荐',
-          page: '/pages/guide/plan/index'
-        },
-        {
-          id: 4,
-          imgUrl: '/image/home/strategy@2x.png',
-          label: '官方攻略',
-          page: '/pages/guide/Strategy/index'
-        },
-        {
-          id: 5,
-          imgUrl: '/image/home/strategy@2x.png',
-          label: '官方攻略1',
-          page: '/pages/guide/Strategy/index'
-        },
-        {
-          id: 6,
-          imgUrl: '/image/home/strategy@2x.png',
-          label: '官方攻略2',
-          page: '/pages/guide/Strategy/index'
+    import wepy from 'wepy'
+    import Ss from '@/components/ss'
+    import Sw from '@/components/sw'
+    import moduleA from 'module-a' // aliasFields ignore module example
+    import Toast from 'wepy-com-toast'
+    console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
+    export default class Index extends wepy.page {
+        config = {
+            navigationBarTitleText: '首页'
         }
-      ],
-      userInfo: {
-        nickName: '加载中...'
-      },
-      normalTitle: '原始标题',
-      setTimeoutTitle: '标题三秒后会被修改',
-      count: 0,
-    }
-    computed = {
-      now() {
-        return +new Date()
-      }
-    }
-    methods = {
-      clickImg() {
-        wx.navigateTo({
-          url: './details'
-        })
-        console.info("details")
-      },
-      switchChange() {
-        this.flag = !this.flag
-      },
-      plus() {
-        this.mynum++
-      },
-      toast() {
-        let promise = this.$invoke('toast', 'show', {
-          title: '系统繁忙',
-          img: 'https://raw.githubusercontent.com/kiinlam/wetoast/master/images/star.png'
-        })
-        promise.then((d) => {
-          console.log('toast done')
-        })
-      },
-      tap() {
-        console.log('do noting from ' + this.$name)
-      }
-     
-     
-    }
-    // events = ['index-emit']
-    // 'index-emit': (...args) => {
-    //   // let $event = args[args.length - 1]
-    //   // console.info("event里面")
-    //   // console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
-    // }
-    onLoad() {
-      let self = this
-      this.$parent.getUserInfo(function(userInfo) {
-        if (userInfo) {
-          self.userInfo = userInfo
+        components = {
+            ss: Ss,
+            sw: Sw,
+            toast: Toast,
         }
-        self.normalTitle = '标题已被修改'
-        self.setTimeoutTitle = '标题三秒后会被修改'
-        setTimeout(() => {
-          self.setTimeoutTitle = '到三秒了'
-          self.$apply()
-        }, 3000)
-        self.$apply()
-      })
+        data = {
+            dd:{},
+            flag: true,
+            mynum: 20,
+            imgUrls: [
+                'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
+                'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
+                'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
+            ],
+            list: [{
+                    id: 1,
+                    imgUrl: '/image/home/scenic@2x.png',
+                    label: '景点推荐',
+                    page: '/pages/guide/spot/index'
+                },
+                {
+                    id: 2,
+                    imgUrl: '/image/home/food@2x.png',
+                    label: '美食推荐',
+                    page: '/pages/home/food/index'
+                },
+                {
+                    id: 3,
+                    imgUrl: '/image/home/route@2x.png',
+                    label: '路线推荐',
+                    page: '/pages/guide/plan/index'
+                },
+                {
+                    id: 4,
+                    imgUrl: '/image/home/strategy@2x.png',
+                    label: '官方攻略',
+                    page: '/pages/guide/Strategy/index'
+                },
+                {
+                    id: 5,
+                    imgUrl: '/image/home/strategy@2x.png',
+                    label: '官方攻略1',
+                    page: '/pages/guide/Strategy/index'
+                },
+                {
+                    id: 6,
+                    imgUrl: '/image/home/strategy@2x.png',
+                    label: '官方攻略2',
+                    page: '/pages/guide/Strategy/index'
+                }
+            ],
+            userInfo: {
+                nickName: '加载中...'
+            },
+            normalTitle: '原始标题',
+            setTimeoutTitle: '标题三秒后会被修改',
+            count: 0,
+        }
+        computed = {
+            now() {
+                return +new Date()
+            }
+        }
+        methods = {
+            clickImg() {
+                wx.navigateTo({
+                    url: `./details?k=22ss&num=${this.mynum}&dd=${this.dd}`
+                })
+                console.info("details")
+            },
+            switchChange() {
+                this.flag = !this.flag
+            },
+            plus() {
+                this.mynum++
+            },
+            toast() {
+                let promise = this.$invoke('toast', 'show', {
+                    title: '系统繁忙',
+                    img: 'https://raw.githubusercontent.com/kiinlam/wetoast/master/images/star.png'
+                })
+                promise.then((d) => {
+                    console.log('toast done')
+                })
+            }
+        }
+        // events = ['index-emit']
+        // 'index-emit': (...args) => {
+        //   // let $event = args[args.length - 1]
+        //   // console.info("event里面")
+        //   // console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+        // }
+        onLoad() {
+            console.info(this)
+            let self = this
+            this.$parent.getUserInfo(function(userInfo) {
+                if (userInfo) {
+                    self.userInfo = userInfo
+                }
+                self.normalTitle = '标题已被修改'
+                self.setTimeoutTitle = '标题三秒后会被修改'
+                setTimeout(() => {
+                    self.setTimeoutTitle = '到三秒了'
+                    self.$apply()
+                }, 3000)
+                self.$apply()
+            })
+        }
     }
-  }
 </script>
