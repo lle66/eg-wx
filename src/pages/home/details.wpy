@@ -1,12 +1,50 @@
+<style lang="less">
+    .audio {
+        display: flex;
+        .left {
+            width: 200rpx;
+            height: 200rpx;
+            .playorstop {
+                width: 100%;
+                height: 100%;
+                .play,
+                .stop {
+                    width: 100rpx;
+                    height: 100rpx;
+                }
+            }
+        }
+        .right{
+            height: 80rpx;
+            flex:1;
+        }
+    }
+</style>
+
 <template>
-    <view>
-        <text>播放音频</text>
-        <audio poster="{{poster}}" name="{{name}}" author="{{author}}" src="{{src}}" id="myAudio" controls loop></audio>
-        <button type="primary" bindtap="audioPlay">播放</button>
-        <button type="primary" bindtap="audioPause">暂停</button>
-        <button type="primary" bindtap="audio14">设置当前播放时间为14秒</button>
-        <button type="primary" bindtap="audioStart">回到开头</button>
-    </view>
+    <block>
+        <view>
+            <audio poster="{{poster}}" name="{{name}}" author="{{author}}" src="{{src}}" id="myAudio" controls loop></audio>
+        </view>
+        <view class="audio">
+            <view class="left">
+                <view @tap="play" class="playorstop">
+                    <image wx:if="{{play}}" class="play" src="/image/home/detail/play-circle-fill.png" mode="scaleToFill" />
+                    <image wx:else class="stop" src="/image/home/detail/poweroff-circle-fill.png" mode="scaleToFill" />
+                </view>
+            </view>
+            <!-- 进度条 -->
+            <view class="right">
+                <!-- <progress percent="10" show-info="true" stroke-width="6" activeColor="#FD7D6F" active="true"/> -->
+          <progress
+            percent="6.6"
+            border-radius=2
+            stroke-width=4
+            activeColor="#FD7D6F"
+          />
+            </view>
+        </view>
+    </block>
 </template>
 <script>
     import wepy from 'wepy'
@@ -15,31 +53,21 @@
             navigationBarTitleText: '详情页'
         }
         data = {
-            poster: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
+            poster: '',
             name: '此时此刻',
             author: '许巍',
-            src: 'D:\myproject\kk\src\image\mm.mp3',
+            src: 'http://localhost:8080/mm.mp3',
+            play: false
         }
         methods = {
-            audioPlay() {
-                this.audioCtx.play()
-            },
-            audioPause() {
-                this.audioCtx.pause()
-            },
-            audio14() {
-                this.audioCtx.seek(14)
-            },
-            audioStart() {
-                this.audioCtx.seek(0)
+            play() {
+                this.play = !this.play
             }
         }
-        onLoad(option) {
-            console.info(option)
-        }
+        onLoad(option) {}
         onReady(e) {
             // 使用 wx.createAudioContext 获取 audio 上下文 context
-            this.audioCtx = wx.createAudioContext('myAudio')
+            // this.audioCtx = wx.createAudioContext('myAudio')
         }
     }
 </script>
