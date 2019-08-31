@@ -1,4 +1,8 @@
 <style lang="less">
+ @font-face {
+font-family: FabTime;
+src: url('http://localhost:8080/fabangTime.ttf') format('truetype');
+}
 // .container{
 // margin: 0;
 // padding:0;

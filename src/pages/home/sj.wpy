@@ -9,7 +9,7 @@
             </image>
             <view class="first_header">
                 <view class="fab">
-                    <image class="fab_img" src="/images/fabang.png" mode="widthFix"></image>
+                    <image class="fab_img" src="/images/fabang.png"></image>
                     <text class="fab_text">{{fabangTime[0]}}</text>
                 </view>
                 <image class="status_img" src="/images/yijiexiao.png" mode="widthFix"></image>
@@ -25,7 +25,7 @@
             <image src="/images/03.png" class="image" mode="widthFix"> </image>
             <view class="second_header">
                 <view class="fab2_left">
-                    <image class="fab2_left_img" src="/images/fabang.png" mode="widthFix"></image>
+                    <image class="fab2_left_img" src="/images/fabang.png"></image>
                     <text class="fab2_left_text">{{fabangTime[1]}}</text>
                 </view>
                 <view class="fab2_right">
@@ -48,7 +48,7 @@
             <image src="/images/04.png" class="image" mode="widthFix"> </image>
             <view class="third_header">
                 <view class="fab3">
-                    <image class="fab3_img" src="/images/fabang.png" mode="widthFix"></image>
+                    <image class="fab3_img" src="/images/fabang.png"></image>
                     <text class="fab3_text">{{fabangTime[2]}}</text>
                 </view>
                 <image class="wait_img" src="/images/wait.png" mode="widthFix"></image>
@@ -311,7 +311,8 @@
                     height: 29rpx;
                 }
                 .fab_text {
-                    font-size: 28rpx; ////////
+                    font-size: 32rpx; ////////
+                    font-family:FabTime;
                 }
             }
             .status_img {
@@ -344,7 +345,10 @@
                     width: 105rpx;
                     height: 29rpx;
                 }
-                .fab2_left_text {}
+                .fab2_left_text {
+                    font-family:FabTime;
+                    font-size: 32rpx;
+                }
                 ////////////////
             }
             .fab2_right {
@@ -353,7 +357,7 @@
                     width: 81rpx;
                     height: 29rpx;
                 }
-                .fab2_left_text {}
+                .fab2_right_text {}
                 /////////////////////
             }
         }
@@ -383,7 +387,10 @@
                     width: 105rpx;
                     height: 29rpx;
                 }
-                .fab3_text {}
+                .fab3_text {
+                    font-family:FabTime;
+                    font-size: 32rpx;
+                }
             }
             .wait_img {
                 margin-left: 120rpx;
