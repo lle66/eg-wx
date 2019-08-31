@@ -10,7 +10,7 @@
             <view class="first_header">
                 <view class="fab">
                     <image class="fab_img" src="/images/fabang.png" mode="widthFix"></image>
-                    <text class="fab_text">10:00</text>
+                    <text class="fab_text">{{fabangTime[0]}}</text>
                 </view>
                 <image class="status_img" src="/images/yijiexiao.png" mode="widthFix"></image>
             </view>
@@ -26,7 +26,7 @@
             <view class="second_header">
                 <view class="fab2_left">
                     <image class="fab2_left_img" src="/images/fabang.png" mode="widthFix"></image>
-                    <text class="fab2_left_text">12:00</text>
+                    <text class="fab2_left_text">{{fabangTime[1]}}</text>
                 </view>
                 <view class="fab2_right">
                     <image class="fab2_right_img" src="/images/daojishi.png" mode="widthFix"></image>
@@ -49,7 +49,7 @@
             <view class="third_header">
                 <view class="fab3">
                     <image class="fab3_img" src="/images/fabang.png" mode="widthFix"></image>
-                    <text class="fab3_text">14:00</text>
+                    <text class="fab3_text">{{fabangTime[2]}}</text>
                 </view>
                 <image class="wait_img" src="/images/wait.png" mode="widthFix"></image>
             </view>
@@ -149,6 +149,7 @@
             navigationBarTitleText: '双井步数'
         };
         data = {
+            fabangTime:["10.00","12:00","14:00"],
             array: [{
                     id: 1,
                     title: "解元",
@@ -285,7 +286,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    } //节点
+    } ////////
     .first {
         position: relative;
         .control {
