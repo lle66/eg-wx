@@ -1,5 +1,8 @@
 <style lang="less">
-
+// .container{
+// margin: 0;
+// padding:0;
+// }
 </style>
 
 <script>
@@ -10,8 +13,9 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/home/index',
+      'pages/home/sj',
       'pages/home/details',
+      'pages/home/index',
       'pages/index',
       'pages/pick',
     ],
@@ -43,6 +47,12 @@ export default class extends wepy.app {
         }
       ]
 
+    },
+    plugins: {
+      WechatSI: {
+        version: '0.2.3',
+        provider: 'wx069ba97219f66d99'
+      }
     }
   }
 

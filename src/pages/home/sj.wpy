@@ -1,0 +1,652 @@
+<template>
+    <block>
+        <image src="/images/01.png" class="image" mode="widthFix"></image>
+        <!-- 乡试 -->
+        <view class="cut first">
+            <!-- 灯笼 -->
+            <button @tap="rule" class="control" style="background-image:url(/images/rule.png)" plain="true"></button>
+            <image src="/images/02.png" class="image" mode="widthFix">
+            </image>
+            <view class="first_header">
+                <view class="fab">
+                    <image class="fab_img" src="/images/fabang.png" mode="widthFix"></image>
+                    <text class="fab_text">10:00</text>
+                </view>
+                <image class="status_img" src="/images/yijiexiao.png" mode="widthFix"></image>
+            </view>
+            <view class="first_list">
+                <block wx:for="{{firstlist}}" wx:key="">
+                    <text class="ignore">{{item}}</text>
+                </block>
+            </view>
+        </view>
+        <!-- 会试 -->
+        <view class="cut second">
+            <image src="/images/03.png" class="image" mode="widthFix"> </image>
+            <view class="second_header">
+                <view class="fab2_left">
+                    <image class="fab2_left_img" src="/images/fabang.png" mode="widthFix"></image>
+                    <text class="fab2_left_text">12:00</text>
+                </view>
+                <view class="fab2_right">
+                    <image class="fab2_right_img" src="/images/daojishi.png" mode="widthFix"></image>
+                    <text class="fab2_right_text">29:59</text>
+                </view>
+                <view class="second_list">
+                    <text wx:if="true" class="ignore">
+                        {{secondlist}}
+                        </text>
+                    <image wx:else src=""></image>
+                </view>
+            </view>
+            <view class="second_list">
+                <text class="ignore">{{item}}</text>
+            </view>
+        </view>
+        <!-- 殿试 -->
+        <view class="cut third">
+            <image src="/images/04.png" class="image" mode="widthFix"> </image>
+            <view class="third_header">
+                <view class="fab3">
+                    <image class="fab3_img" src="/images/fabang.png" mode="widthFix"></image>
+                    <text class="fab3_text">14:00</text>
+                </view>
+                <image class="wait_img" src="/images/wait.png" mode="widthFix"></image>
+            </view>
+            <view class="third_list">
+                <block wx:for="{{thirdlist}}" wx:key="">
+                    <text class="ignore">{{item}}</text>
+                </block>
+            </view>
+        </view>
+        <view class="cut forth">
+            <image class="forth1" src="/images/paiming.png" mode="widthFix"></image>
+            <image src="/images/bg_1.png" class="image" mode="widthFix"></image>
+            <view class="forth_div" style="width:100%;height:{{cHeight}}rpx"></view>
+            <image src="/images/bg_2.png" class="image" style="height:200rpx" mode="widthFix"></image>
+            <!-- 内容框 -->
+            <view class="content">
+                <view class="content_header">
+                    <text class="content_header_left">前20名</text>
+                    <view @tap="refresh" class="content_header_right">
+                        <image src="/images/refresh.png"></image>
+                        <text>刷新</text>
+                    </view>
+                </view>
+                <view class="content_center">
+                    <view class="content_center1">
+                        <view class="myrank">
+                            <image src="/images/wpaiming.png">
+                            </image>
+                            <text>我的排名</text>
+                        </view>
+                        <text class="rank_num">30</text>
+                    </view>
+                    <view class="content_center2">
+                        <text>你已获得举人称号！努力积累步数，高中状元不是梦！</text>
+                        <view class="content_center2_wapper">
+                            <view class="ss">
+                                <image class="person_img" src="/images/1.png" mode="widthFix"></image>
+                                <text class="content_center2_text1">渐渐啊</text>
+                            </view>
+                            <view>
+                                <text class="content_center2_text2">5000</text>
+                                <text class="content_center2_text3">步</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="content_table">
+                    <view class="table_header">
+                        <view class="text_image1_wapper">
+                            <image class="text_image1" src="/images/paiming2.png"></image>
+                        </view>
+                        <view class="text_image2_wapper">
+                            <image class="text_image2" src="/images/chenghao.png"></image>
+                        </view>
+                        <view class="text_image3_wapper">
+                            <image class="text_image3" src="/images/touxiang.png"></image>
+                        </view>
+                        <view class="text_image4_wapper">
+                            <image class="text_image4" src="/images/name.png"></image>
+                        </view>
+                        <view class="text_image5_wapper">
+                            <image class="text_image5" src="/images/bushu.png"></image>
+                        </view>
+                    </view>
+                    <view class="table_content">
+                        <view class="block" wx:for="{{array}}" wx:key="">
+                            <!-- 排名 -->
+                            <view class="paiming_wapper">
+                                <image wx:if="{{item.id==1}}" src="/images/1.png" class="paiming" mode="widthFix"></image>
+                                <image wx:elif="{{item.id==2}}" src="/images/2.png" class="paiming" mode="widthFix"></image>
+                                <image wx:elif="{{item.id==3}}" src="/images/3.png" class="paiming" mode="widthFix"></image>
+                                <text wx:else>{{item.id}}</text>
+                            </view>
+                            <view class="person_text_wapper"><text class="person_text">{{item.title}}</text></view>
+                            <view class="person_img_wapper">
+                                <image src="{{item.headImg}}" class="person_img" mode="widthFix"> </image>
+                            </view>
+                            <view class="person_text_wapper2"><text class="person_text">{{item.name}}</text>
+                            </view>
+                            <view class="step_wapper"><text class="step_num">{{item.stepNum}}</text>
+                                <text class="step_unit">步</text></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="fifth">
+            <image src="/images/05.png" class="image" mode="widthFix"> </image>
+            <view @tap="pageTo" plain="true"><text>点击了解</text></view>
+        </view>
+    </block>
+</template>
+<script>
+    import wepy from 'wepy';
+    export default class Index extends wepy.page {
+        config = {
+            navigationBarTitleText: '双井步数'
+        };
+        data = {
+            array: [{
+                    id: 1,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊111111111111111111",
+                    stepNum: 5000
+                },
+                {
+                    id: 2,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 3,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 4,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                },
+                {
+                    id: 5,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 6,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 7,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 8,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 9,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 10,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 11,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 12,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 13,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }, {
+                    id: 14,
+                    title: "解元",
+                    headImg: "/images/1.png",
+                    name: "渐渐啊",
+                    stepNum: 5000
+                }
+            ],
+            firstlist: ["王富贵", "李铁注112544989888", "孙山"],
+            secondlist: "汪汪汪",
+            thirdlist: ["王富贵222222", "李铁注112544989888", "孙山22222"]
+        };
+        computed = {
+            cHeight() {
+                let l = this.array.length;
+                if (l < 4) {
+                    return 0;
+                } else {
+                    return (l - 3) * 114 - 46;
+                }
+            }
+        }
+        methods = {
+            //刷新 重新请求
+            refresh() {},
+            //规则
+            rule() {},
+            //跳转
+            pageTo() {
+                wx.navigateTo({
+                    url: `./details`
+                })
+            }
+        };
+        onLoad(option) {}
+        onReady(e) {}
+    }
+</script>
+
+<style lang="less">
+    // 公共
+    .image {
+        width: 100%;
+    }
+    .cut {
+        margin-top: -8rpx;
+    }
+    .person_img {
+        width: 64rpx;
+        height: 64rpx;
+    }
+    .ignore {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    } //节点
+    .first {
+        position: relative;
+        .control {
+            position: absolute;
+            top: -31rpx;
+            width: 75rpx;
+            height: 162rpx;
+            right: 28rpx;
+            background-size: 75rpx 162rpx;
+            z-index: 9999;
+            border: none;
+        }
+        .first_header {
+            position: absolute;
+            top: 206rpx;
+            left: 134rpx;
+            display: flex;
+            align-items: center;
+            .fab {
+                .fab_img {
+                    width: 105rpx;
+                    height: 29rpx;
+                }
+                .fab_text {
+                    font-size: 28rpx; ////////
+                }
+            }
+            .status_img {
+                margin-left: 120rpx;
+                width: 81rpx;
+            }
+        }
+        .first_list {
+            position: absolute;
+            left: 330rpx;
+            top: 265rpx;
+            text {
+                width: 110rpx;
+                font-weight: bold;
+                font-size: 30rpx;
+                margin-bottom: 12rpx;
+            }
+        }
+    }
+    .second {
+        position: relative;
+        .second_header {
+            position: absolute;
+            top: 200rpx;
+            left: 266rpx;
+            display: flex;
+            align-items: center;
+            .fab2_left {
+                .fab2_left_img {
+                    width: 105rpx;
+                    height: 29rpx;
+                }
+                .fab2_left_text {}
+                ////////////////
+            }
+            .fab2_right {
+                margin-left: 45rpx;
+                .fab2_right_img {
+                    width: 81rpx;
+                    height: 29rpx;
+                }
+                .fab2_left_text {}
+                /////////////////////
+            }
+        }
+        .second_list {
+            position: absolute;
+            left: 200rpx;
+            top: 25rpx;
+            z-index: 9999;
+            text {
+                width: 110rpx;
+                font-weight: bold;
+                font-size: 30rpx;
+                margin-bottom: 12rpx;
+            }
+        }
+    }
+    .third {
+        position: relative;
+        .third_header {
+            position: absolute;
+            top: 210rpx;
+            left: 190rpx;
+            display: flex;
+            align-items: center;
+            .fab3 {
+                .fab3_img {
+                    width: 105rpx;
+                    height: 29rpx;
+                }
+                .fab3_text {}
+            }
+            .wait_img {
+                margin-left: 120rpx;
+                width: 81rpx;
+            }
+        }
+        .third_list {
+            position: absolute;
+            left: 390rpx;
+            top: 270rpx;
+            text {
+                width: 110rpx;
+                font-weight: bold;
+                font-size: 30rpx;
+                margin-bottom: 12rpx;
+            }
+        }
+    }
+    .forth {
+        margin-top: -8rpx;
+        position: relative;
+        text-align: center;
+        background-color: #f8eeda;
+    }
+    .forth1 {
+        position: absolute;
+        top: -37rpx;
+        left: 50%;
+        transform: translate(-50%, 0);
+        z-index: 9999;
+        width: 432rpx;
+        height: 74rpx;
+    }
+    .content {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 8rpx;
+        transform: translate(-50%, 0);
+        width: 92.53%;
+        height: auto;
+        border: 4rpx solid #8d481a;
+        border-radius: 15rpx;
+        background-color: #fdd24e;
+    }
+    .content_header {
+        height: 40rpx;
+        margin: 44rpx 24rpx 24rpx;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+        .content_header_left {
+            color: #8d481a;
+            font-size: 24rpx; 
+        }
+        .content_header_right {
+            border: 0;
+            background-color: #fdd24e;
+            image {
+                width: 31rpx;
+                height: 33rpx;
+                vertical-align: middle;
+            }
+            text {
+                font-size: 24rpx;
+                color: #8d481a;
+                vertical-align: middle;
+            }
+        }
+    }
+    .content_center {
+        margin-top: 20rpx;
+        margin-left: 16rpx;
+        width: 660rpx;
+        height: 152rpx;
+        background-color: #fee9a7;
+        border-radius: 6rpx;
+        display: flex;
+        .content_center1 {
+            width: 112rpx;
+            padding-top: 16rpx;
+            padding-right: 12rpx;
+            .myrank {
+                position: relative;
+                margin-bottom: 16rpx;
+                &>image {
+                    width: 112rpx;
+                    height: 32rpx;
+                }
+                &>text {
+                    position: absolute;
+                    top: 4rpx;
+                    left: 16rpx;
+                    color: #ffffff;
+                    font-size: 18rpx;
+                    letter-spacing: 3rpx;
+                }
+            }
+            .rank_num {
+                font-size: 36rpx;
+                color: #8d481a;
+            }
+        }
+        .content_center2 {
+            flex: 1;
+            width: 530rpx;
+            padding-top: 10rpx;
+            &>text {
+                font-size: 22rpx;
+                color: #bb732d;
+            }
+            .content_center2_wapper {
+                margin-top: 16rpx;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .ss {
+                    display: flex;
+                    align-items: center;
+                    .person_img {
+                        width: 64rpx;
+                        height: 64rpx;
+                        margin-right: 20rpx;
+                    }
+                    .content_center2_text1 {
+                        font-size: 32rpx;
+                        color: #8d481a;
+                    }
+                }
+                .content_center2_text2 {
+                    font-size: 36rpx;
+                    color: #8d481a;
+                }
+                .content_center2_text3 {
+                    margin-right: 40rpx;
+                    margin-left: 4rpx;
+                    font-size: 24rpx;
+                    color: #8d481a;
+                }
+            }
+        }
+    }
+    .content_table {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .table_header {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 660rpx;
+            height: 40rpx;
+            margin-top: 26rpx;
+            .text_image1_wapper {
+                width: 80rpx;
+                .text_image1 {
+                    width: 56rpx;
+                    height: 33rpx;
+                }
+            }
+            .text_image2_wapper {
+                width: 90rpx;
+                .text_image2 {
+                    width: 59rpx;
+                    height: 29rpx;
+                }
+            }
+            .text_image3_wapper {
+                width: 104rpx;
+                .text_image3 {
+                    width: 58rpx;
+                    height: 33rpx;
+                }
+            }
+            .text_image4_wapper {
+                width: 234rpx;
+                .text_image4 {
+                    width: 60rpx;
+                    height: 30rpx;
+                }
+            }
+            .text_image5_wapper {
+                width: 152rpx;
+                .text_image5 {
+                    width: 56rpx;
+                    height: 34rpx;
+                }
+            }
+        }
+        .table_content {
+            width: 660rpx;
+            .block {
+                border: 0;
+                border-bottom: 2rpx solid #dfb32c;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                height: 114rpx;
+                .paiming_wapper {
+                    width: 80rpx;
+                    .paiming {
+                        width: 58rpx;
+                        height: 54rpx;
+                    }
+                }
+                .person_text_wapper {
+                    width: 90rpx;
+                    .person_text {
+                        font-size: 30rpx;
+                        color: #333333;
+                    }
+                }
+                .person_img_wapper {
+                    width: 104rpx;
+                    .person_img {
+                        width: 64rpx;
+                        height: 64rpx;
+                    }
+                }
+                .person_text_wapper2 {
+                    width: 234rpx;
+                    .person_text {
+                        max-width: 234rpx;
+                        display: block;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        font-size: 30rpx;
+                        color: #333333;
+                    }
+                }
+                .step_wapper {
+                    width: 152rpx;
+                    .step_num {
+                        font-size: 36rpx;
+                        color: #333333
+                    }
+                    .step_unit {
+                        font-size: 24rpx;
+                        color: #333333;
+                    }
+                }
+            }
+        }
+    }
+    .fifth {
+        position: relative;
+        top: -8rpx;
+        &>view {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: absolute;
+            left: 276rpx;
+            top: 120rpx;
+            background-color: #ffffff;
+            width: 190rpx;
+            height: 56rpx;
+            border-radius: 28rpx;
+            text {
+                font-size: 30rox;
+                color: #1190f9;
+            }
+        }
+    }
+</style>

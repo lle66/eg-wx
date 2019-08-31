@@ -1,23 +1,43 @@
 <style lang="less">
     .audio {
         display: flex;
+        align-items: center;
+        justify-content: space-around;
         .left {
             width: 200rpx;
-            height: 200rpx;
+            height: 100rpx;
             .playorstop {
                 width: 100%;
                 height: 100%;
+                display: flex;
+                justify-content: flex-end;
                 .play,
                 .stop {
+                    margin-right: 30rpx;
                     width: 100rpx;
                     height: 100rpx;
                 }
             }
         }
-        .right{
-            height: 80rpx;
-            flex:1;
+        .right {
+            flex: 1;
+            height: 100rpx;
+            display: flex;
+            align-content: flex-start;
+            .progress {
+                margin-top: 30rpx;
+                width: 400rpx;
+                height: 50rpx;
+            }
         }
+    }
+    .text {
+        // position: relative;
+        // left: 80rpx;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
@@ -29,39 +49,60 @@
         <view class="audio">
             <view class="left">
                 <view @tap="play" class="playorstop">
-                    <image wx:if="{{play}}" class="play" src="/image/home/detail/play-circle-fill.png" mode="scaleToFill" />
-                    <image wx:else class="stop" src="/image/home/detail/poweroff-circle-fill.png" mode="scaleToFill" />
+                    <image wx:if="{{play}}" class="play" src="/image/home/detail/poweroff-circle-fill.png" mode="scaleToFill" />
+                    <image wx:else class="stop" src="/image/home/detail/play-circle-fill.png" mode="scaleToFill" />
                 </view>
             </view>
             <!-- 进度条 -->
             <view class="right">
-                <!-- <progress percent="10" show-info="true" stroke-width="6" activeColor="#FD7D6F" active="true"/> -->
-          <progress
-            percent="6.6"
-            border-radius=2
-            stroke-width=4
-            activeColor="#FD7D6F"
-          />
+                <progress class="progress" percent="{{percent}}" border-radius="2" stroke-width="4" activeColor="#FD7D6F" />
             </view>
+        </view>
+        <view class="text">
+            <!-- <view> -->
+            <text style="font-weight:bold">{{text.title}}\n</text>
+            <text>{{text.content}}</text>
+            <!-- </view> -->
         </view>
     </block>
 </template>
 <script>
     import wepy from 'wepy'
+    const plugin = requirePlugin("WechatSI")
     export default class Index extends wepy.page {
         config = {
             navigationBarTitleText: '详情页'
         }
         data = {
             poster: '',
-            name: '此时此刻',
-            author: '许巍',
+            name: '哈哈哈哈',
+            author: '邓紫棋',
             src: 'http://localhost:8080/mm.mp3',
-            play: false
+            play: false,
+            percent: 0,
+            text: {
+                title: "面朝大海，春暖花开",
+                content: " 从明天起，做一个幸福的人\n喂马，劈柴，周游世界\n从明天起，关心粮食和蔬菜\n我有一所房子，面朝大海，春暖花开\n从明天起，和每一个亲人通信告诉他们我的幸福\n那幸福的闪电告诉我的\n我将告诉每一个人\n给每一条河每一座山取一个温暖的名字\n陌生人，我也为你祝福\n愿你有一个灿烂的前程\n愿你有情人终成眷属\n愿你在尘世获得幸福\n我只愿面朝大海，春暖花开"
+            },
+            file: "",
         }
         methods = {
             play() {
                 this.play = !this.play
+                var innerAudioContext = wx.createInnerAudioContext()
+                plugin.textToSpeech({
+                    lang: "zh_CN",
+                    tts: true,
+                    content: this.text.content,
+                    success: function(res) {
+                        console.log("succ tts", res.filename)
+                        innerAudioContext.src = res.filename
+                        innerAudioContext.play()
+                    },
+                    fail: function(res) {
+                        console.log("fail tts", res)
+                    }
+                })
             }
         }
         onLoad(option) {}
